@@ -7,7 +7,7 @@ The library is hosted on NuGet. You can install the same to your project using b
 
 Installing **ExotelSdk** using [NuGet Package Manager Console](https://www.nuget.org/) 
 ```bash
-PM>Install-Package Extension.Methods
+PM>Install-Package ExotelSdk
 ```
 
 This will install the packages and its dependencies to your project and you can start using the methods just by importing the **ExotelSdk** namespace. 
