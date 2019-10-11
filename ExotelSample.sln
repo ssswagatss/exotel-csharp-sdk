@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2041
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExotelSample.Phone", "ExotelSample.Phone\ExotelSample.Phone.csproj", "{FD204542-7755-47CD-ACA4-BE995D6159DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExotelSdk", "ExotelSdk\ExotelSdk.csproj", "{02D3ACA6-C389-4CFD-A5E5-42E0F81C26F5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FD204542-7755-47CD-ACA4-BE995D6159DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD204542-7755-47CD-ACA4-BE995D6159DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD204542-7755-47CD-ACA4-BE995D6159DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD204542-7755-47CD-ACA4-BE995D6159DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02D3ACA6-C389-4CFD-A5E5-42E0F81C26F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02D3ACA6-C389-4CFD-A5E5-42E0F81C26F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02D3ACA6-C389-4CFD-A5E5-42E0F81C26F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02D3ACA6-C389-4CFD-A5E5-42E0F81C26F5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8F63084B-B2DC-4030-924C-D19214BFD34B}
+	EndGlobalSection
+EndGlobal
