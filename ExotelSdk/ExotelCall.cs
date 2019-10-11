@@ -28,6 +28,20 @@ namespace ExotelSdk
             _baseUrl = $"https://api.exotel.com/v1/Accounts/{this._sId}/";
         }
 
+        /// <summary>
+        /// This API will connect two numbers. It connects From Number first. Once the person at the From end picks up the phone, it will connect to the number provided as To. You can choose which number should be connected first by adding that number in the From field. An HTTP POST request is made to
+        /// </summary>
+        /// <param name="from">The phone number that will be called first. Preferably in E.164 format. If not set, our system will try to match it with a country and make a call. If landline number, prefix it with STD code; Ex: 080XXXX2400</param>
+        /// <param name="to">Your customer's phone number. If landline number, prefix it with STD code; Ex: 080XXXX2400</param>
+        /// <param name="callerId">This is your ExoPhone/Exotel Virtual Number</param>
+        /// <param name="timeLimit">The time limit (in seconds) that you want this call to last. The call will be cut after this time</param>
+        /// <param name="timeOut">The time (in seconds) to ring the called parties (both first and second call leg)</param>
+        /// <param name="statusCallback">An HTTP POST request will be made to this URL depending on what events are subscribed using ‘StatusCallbackEvents’.</param>
+        /// <param name="isRecord">Record the conversation of your call. The RecordingUrl will be sent to the StatusCallback URL if this is set to 'true' and the call conversation happens. Can be:
+        ///true (default) - Call conversation will be recorded.
+        ///false - Call conversation will not be recorded.
+        ///</param>
+        /// <returns></returns>
         public async Task<ExotelResponse> ConnectTwoNumbersAsync(string from, string to, string callerId, int? timeLimit = null,
                                               int? timeOut = null, string statusCallback = null, bool isRecord = true)
         {
