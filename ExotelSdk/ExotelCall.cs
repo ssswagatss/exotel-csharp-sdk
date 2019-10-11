@@ -20,6 +20,12 @@ namespace ExotelSdk
         private const string _callEndPoint = "Calls/connect.json";
         private const string _smsEndPoint = "Sms/send.json";
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExotelCall"/> class.
+        /// </summary>
+        /// <param name="sid">Account sid.</param>
+        /// <param name="apiKey">Your API key.</param>
+        /// <param name="apiToken">Your API token.</param>
         public ExotelCall(string sid, string apiKey, string apiToken)
         {
             _sId = sid;
