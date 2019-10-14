@@ -37,7 +37,7 @@ The project contains extension methods for the followings.
 ## Api Reference Details
 
 * ### ConnectTwoNumbersAsync()
-This API will connect two numbers. It connects From Number first. Once the person at the From end picks up the phone, it will connect to the number provided as To. You can choose which number should be connected first by adding that number in the From field. An HTTP POST request is made.
+This API will connect two numbers. It connects From Number first. Once the person at the From end picks up the phone, it will connect to the number provided as To. You can choose which number should be connected first by adding that number in the From field.
 
 ```csharp
 /// from : The phone number that will be called first. If not set, our system will try to match it with a country and make a call. If landline number, prefix it with STD code; Ex: 080XXXX2400
