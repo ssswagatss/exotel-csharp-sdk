@@ -16,6 +16,8 @@ namespace ExotelSdk
         private readonly string _apiKey;
         private readonly string _apiToken;
         private readonly string _baseUrl;
+        private static HttpClient _httpClient;
+
 
         private const string _callEndPoint = "Calls/connect.json";
         private const string _smsEndPoint = "Sms/send.json";
@@ -32,6 +34,8 @@ namespace ExotelSdk
             _apiKey = apiKey;
             _apiToken = apiToken;
             _baseUrl = $"https://api.exotel.com/v1/Accounts/{this._sId}/";
+            _httpClient = new HttpClient();
+            _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{_apiKey}:{_apiToken}")));
         }
 
         /// <summary>
@@ -66,28 +70,23 @@ namespace ExotelSdk
                 postValues.Add("StatusCallback", statusCallback);
             if (!isRecord)
                 postValues.Add("Record", "false");
-
-
             var formContent = ConvertToFormUrlEncodedContent(postValues);
-            using (HttpClient client = new HttpClient())
-            {
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{_apiKey}:{_apiToken}")));
-                var postResponse = await client.PostAsync($"{_baseUrl}/{_callEndPoint}", formContent);
-                var responsesrtr = await postResponse.Content.ReadAsStringAsync();
-                JObject rss = JObject.Parse(responsesrtr);
-                if (postResponse.IsSuccessStatusCode)
-                {
-                    response.IsSuccess = true;
-                    if (rss.ContainsKey("Call"))
-                        response.Call = JsonConvert.DeserializeObject<ExotelCallResponse>(rss["Call"].ToString());
-                }
-                else
-                {
-                    response.IsSuccess = false;
-                    if (rss.ContainsKey("RestException"))
-                        response.RestException = JsonConvert.DeserializeObject<ExotelRestException>(rss["RestException"].ToString());
 
-                }
+            var postResponse = await _httpClient.PostAsync($"{_baseUrl}/{_callEndPoint}", formContent);
+            var responsesrtr = await postResponse.Content.ReadAsStringAsync();
+            JObject rss = JObject.Parse(responsesrtr);
+            if (postResponse.IsSuccessStatusCode)
+            {
+                response.IsSuccess = true;
+                if (rss.ContainsKey("Call"))
+                    response.Call = JsonConvert.DeserializeObject<ExotelCallResponse>(rss["Call"].ToString());
+            }
+            else
+            {
+                response.IsSuccess = false;
+                if (rss.ContainsKey("RestException"))
+                    response.RestException = JsonConvert.DeserializeObject<ExotelRestException>(rss["RestException"].ToString());
+
             }
             return response;
         }
