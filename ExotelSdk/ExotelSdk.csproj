@@ -3,14 +3,15 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Swagat Kumar Swain</Authors>
-    <Description>Implements Exotels Restful API using c-sharp</Description>
+    <Description>Implements Exotels Restful API using c-sharp. Adds both Call and SMS endpoints.</Description>
     <Copyright>Copyright (c) 2019 Swagat Kumar Swain</Copyright>
     <PackageLicenseUrl>https://raw.githubusercontent.com/ssswagatss/exotel-csharp-sdk/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/ssswagatss/exotel-csharp-sdk</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ssswagatss/exotel-csharp-sdk</RepositoryUrl>
     <PackageTags>exotel,exotel-sdk</PackageTags>
-    <PackageReleaseNotes>Implements Exotels Restful API using c-sharp</PackageReleaseNotes>
+    <PackageReleaseNotes>Adds SMS endpoints.</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
