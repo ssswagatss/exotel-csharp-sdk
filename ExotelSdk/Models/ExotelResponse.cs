@@ -9,5 +9,6 @@ namespace ExotelSdk.Models
         public bool IsSuccess { get; set; }
         public ExotelRestException RestException { get; set; }
         public ExotelCallResponse Call { get; set; }
+        public ExotelSmsResponse SMSMessage { get; set; }
     }
 }
