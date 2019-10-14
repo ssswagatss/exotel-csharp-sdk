@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ExotelSdk
 {
-    public class ExotelCall
+    public class ExotelConnect
     {
         private readonly string _sId;
         private readonly string _apiKey;
@@ -24,12 +24,12 @@ namespace ExotelSdk
         private const string _callDetailsEndPoint = "Calls";
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ExotelCall"/> class.
+        /// Initializes a new instance of the <see cref="ExotelConnect"/> class.
         /// </summary>
         /// <param name="sid">Account sid.</param>
         /// <param name="apiKey">Your API key.</param>
         /// <param name="apiToken">Your API token.</param>
-        public ExotelCall(string sid, string apiKey, string apiToken)
+        public ExotelConnect(string sid, string apiKey, string apiToken)
         {
             _sId = sid;
             _apiKey = apiKey;
