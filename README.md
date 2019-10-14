@@ -31,8 +31,8 @@ The project contains extension methods for the followings.
 
 - [Outgoing call to connect two numbers](#connecttwonumbersasync)
 - [Call details](#getcalldetails)
-- [Send SMS](https://github.com/ssswagatss/extension-methods/blob/development/Docs/StringExtensionDocs.md)
-- [SMS details](https://github.com/ssswagatss/extension-methods/blob/development/Docs/StringExtensionDocs.md)
+- [Send SMS](#sendsms)
+- [SMS details](#getsmsdetails)
 
 ## Api Reference Details
 
@@ -72,3 +72,37 @@ public async Task<ExotelResponse> GetCallDetails(string callReferenceId);
     var response =await c.GetCallDetails("<sid_for_call>");
 ```
 Click here to check the [Official documentation](https://developer.exotel.com/api/#call-details)
+
+* ### SendSms()
+This API will send an SMS to the specified To number.
+
+```csharp
+/// from : Specify one of your ExoPhone
+/// to : Mobile number to which SMS has to be sent.
+/// messageBody : Content of your SMS; Max Length of the body cannot exceed 2000 characters
+/// encodingType : Message type of SMS; "plain" or "unicode"
+/// priority : Priority of the SMS; "normal" or "high". Business critical operations like sending verification codes, confirming appointments etc which require immediate SMS delivery should opt for high priority.
+public async Task<ExotelResponse> SendSms(string from, string to, string messageBody, string encodingType = "", string priority = "");
+```
+#### Example
+```csharp
+    // Other codes are removed for clarity
+    ExotelConnect c = new ExotelConnect("<your_sid>", "<your_api_key>", "<your_api_token>");
+    var response =await c.SendSms("<your_from_phone_number>","<your_to_phone_number","<your_message_body>");
+```
+Click here to check the [Official documentation](https://developer.exotel.com/api/#send-sms)
+
+* ### GetSmsDetails()
+Gets the SMS details
+
+```csharp
+/// smsReferenceId : SMS reference Id
+public async Task<ExotelResponse> GetSmsDetails(string smsReferenceId);
+```
+#### Example
+```csharp
+    // Other codes are removed for clarity
+    ExotelConnect c = new ExotelConnect("<your_sid>", "<your_api_key>", "<your_api_token>");
+    var response =await c.GetSmsDetails("<your_sms_sid>");
+```
+Click here to check the [Official documentation](https://developer.exotel.com/api/#send-details)
