@@ -21,6 +21,7 @@ namespace ExotelSdk
 
         private const string _callEndPoint = "Calls/connect.json";
         private const string _smsEndPoint = "Sms/send.json";
+        private const string _callDetailsEndPoint = "Calls";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExotelCall"/> class.
@@ -76,6 +77,33 @@ namespace ExotelSdk
             var responsesrtr = await postResponse.Content.ReadAsStringAsync();
             JObject rss = JObject.Parse(responsesrtr);
             if (postResponse.IsSuccessStatusCode)
+            {
+                response.IsSuccess = true;
+                if (rss.ContainsKey("Call"))
+                    response.Call = JsonConvert.DeserializeObject<ExotelCallResponse>(rss["Call"].ToString());
+            }
+            else
+            {
+                response.IsSuccess = false;
+                if (rss.ContainsKey("RestException"))
+                    response.RestException = JsonConvert.DeserializeObject<ExotelRestException>(rss["RestException"].ToString());
+
+            }
+            return response;
+        }
+
+        /// <summary>
+        /// Gets the call details.
+        /// </summary>
+        /// <param name="callReferenceId">Call Reference Id</param>
+        /// <returns></returns>
+        public async Task<ExotelResponse> GetCallDetails(string callReferenceId)
+        {
+            var response = new ExotelResponse();
+            var getResponse = await _httpClient.GetAsync($"{_baseUrl}/{_callDetailsEndPoint}/{callReferenceId}.json");
+            var responsesrtr = await getResponse.Content.ReadAsStringAsync();
+            JObject rss = JObject.Parse(responsesrtr);
+            if (getResponse.IsSuccessStatusCode)
             {
                 response.IsSuccess = true;
                 if (rss.ContainsKey("Call"))
