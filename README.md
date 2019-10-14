@@ -30,7 +30,7 @@ This will install the packages and its dependencies to your project and you can 
 The project contains extension methods for the followings. 
 
 - [Outgoing call to connect two numbers](#connecttwonumbersasync)
-- [Call details](https://github.com/ssswagatss/extension-methods/blob/development/Docs/StringExtensionDocs.md)
+- [Call details](#getcalldetails)
 - [Send SMS](https://github.com/ssswagatss/extension-methods/blob/development/Docs/StringExtensionDocs.md)
 - [SMS details](https://github.com/ssswagatss/extension-methods/blob/development/Docs/StringExtensionDocs.md)
 
@@ -56,4 +56,19 @@ public async Task<ExotelResponse> ConnectTwoNumbersAsync(string from, string to,
     ExotelConnect c = new ExotelConnect("<your_sid>", "<your_api_key>", "<your_api_token>");
     var response =await c.ConnectTwoNumbersAsync("<your_from_phone_number>", "<your_to_phone_number>", "<your_exotel_phone_number>");
 ```
-[Check the official documentation](https://developer.exotel.com/api/#call-agent)
+Click here to check the [Official documentation](https://developer.exotel.com/api/#call-agent)
+
+* ### GetCallDetails()
+Gets the call details(including Status, Price, etc.).
+
+```csharp
+/// callReferenceId : Call Reference Id
+public async Task<ExotelResponse> GetCallDetails(string callReferenceId);
+```
+#### Example
+```csharp
+    // Other codes are removed for clarity
+    ExotelConnect c = new ExotelConnect("<your_sid>", "<your_api_key>", "<your_api_token>");
+    var response =await c.GetCallDetails("<sid_for_call>");
+```
+Click here to check the [Official documentation](https://developer.exotel.com/api/#call-details)
