@@ -56,12 +56,10 @@ namespace ExotelSdk
         public async Task<ExotelResponse> ConnectTwoNumbersAsync(string from, string to, string callerId, int? timeLimit = null,
                                               int? timeOut = null, string statusCallback = null, bool isRecord = true)
         {
-            var response = new ExotelResponse();
             Dictionary<string, string> postValues = new Dictionary<string, string>();
             postValues.Add("From", from);
             postValues.Add("To", to);
             postValues.Add("CallerId", callerId);
-
             //Bind the optional parameters
             if (timeLimit.HasValue)
                 postValues.Add("TimeLimit", timeLimit.Value.ToString());
@@ -72,24 +70,8 @@ namespace ExotelSdk
             if (!isRecord)
                 postValues.Add("Record", "false");
             var formContent = ConvertToFormUrlEncodedContent(postValues);
-
             var postResponse = await _httpClient.PostAsync($"{_baseUrl}/{_callEndPoint}", formContent);
-            var responsesrtr = await postResponse.Content.ReadAsStringAsync();
-            JObject rss = JObject.Parse(responsesrtr);
-            if (postResponse.IsSuccessStatusCode)
-            {
-                response.IsSuccess = true;
-                if (rss.ContainsKey("Call"))
-                    response.Call = JsonConvert.DeserializeObject<ExotelCallResponse>(rss["Call"].ToString());
-            }
-            else
-            {
-                response.IsSuccess = false;
-                if (rss.ContainsKey("RestException"))
-                    response.RestException = JsonConvert.DeserializeObject<ExotelRestException>(rss["RestException"].ToString());
-
-            }
-            return response;
+            return await MapExotelResponse(postResponse);
         }
 
         /// <summary>
@@ -99,11 +81,15 @@ namespace ExotelSdk
         /// <returns></returns>
         public async Task<ExotelResponse> GetCallDetails(string callReferenceId)
         {
-            var response = new ExotelResponse();
             var getResponse = await _httpClient.GetAsync($"{_baseUrl}/{_callDetailsEndPoint}/{callReferenceId}.json");
-            var responsesrtr = await getResponse.Content.ReadAsStringAsync();
+            return await MapExotelResponse(getResponse);
+        }
+        private async Task<ExotelResponse> MapExotelResponse(HttpResponseMessage responseMessage)
+        {
+            var response = new ExotelResponse();
+            var responsesrtr = await responseMessage.Content.ReadAsStringAsync();
             JObject rss = JObject.Parse(responsesrtr);
-            if (getResponse.IsSuccessStatusCode)
+            if (responseMessage.IsSuccessStatusCode)
             {
                 response.IsSuccess = true;
                 if (rss.ContainsKey("Call"))
@@ -114,7 +100,6 @@ namespace ExotelSdk
                 response.IsSuccess = false;
                 if (rss.ContainsKey("RestException"))
                     response.RestException = JsonConvert.DeserializeObject<ExotelRestException>(rss["RestException"].ToString());
-
             }
             return response;
         }
