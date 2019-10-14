@@ -56,3 +56,4 @@ public async Task<ExotelResponse> ConnectTwoNumbersAsync(string from, string to,
     ExotelConnect c = new ExotelConnect("<your_sid>", "<your_api_key>", "<your_api_token>");
     var response =await c.ConnectTwoNumbersAsync("<your_from_phone_number>", "<your_to_phone_number>", "<your_exotel_phone_number>");
 ```
+[Check the official documentation](https://developer.exotel.com/api/#call-agent)
